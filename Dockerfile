@@ -1,18 +1,18 @@
-# ReactFrontend/Dockerfile
-FROM node:16-alpine AS build
-WORKDIR /usr/src/app
+# ---------- BUILD STAGE ----------
+FROM node:16 AS build
+WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
-RUN npm run build   # produces ./build
+RUN npm run build
 
-# serve with lightweight static server
+# ---------- PRODUCTION STAGE ----------
 FROM nginx:alpine
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
+
   
