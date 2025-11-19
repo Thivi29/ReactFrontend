@@ -5,8 +5,8 @@ phases:
     commands:
       - echo Logging in to DockerHub...
       - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
-      - REPOSITORY_URI="docker.io/anujsharma1990/frontend"
-      - CONTAINER_NAME="frontend-container"
+      - REPOSITORY_URI="219677711575.dkr.ecr.us-east-1.amazonaws.com/frontend:latest"
+      - CONTAINER_NAME="frontend"
       - IMAGE_TAG="latest"
   build:
     commands:
